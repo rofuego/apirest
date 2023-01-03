@@ -80,5 +80,4 @@ public class ProductEntity {
 	public ProductEntity() {
 		super();
 	}
-
 }

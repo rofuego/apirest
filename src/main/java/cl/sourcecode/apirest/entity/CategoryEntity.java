@@ -21,9 +21,6 @@ public class CategoryEntity {
 	@Column(nullable = false)
 	private String name;
 
-	@Column(nullable = false)
-	private String description;
-
 	@OneToMany(mappedBy = "category")
 	private List<ProductEntity> producs;
 
@@ -43,14 +40,6 @@ public class CategoryEntity {
 		this.name = name;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	public List<ProductEntity> getProducs() {
 		return producs;
 	}
@@ -59,11 +48,10 @@ public class CategoryEntity {
 		this.producs = producs;
 	}
 
-	public CategoryEntity(Long id, String name, String description, List<ProductEntity> producs) {
+	public CategoryEntity(Long id, String name, List<ProductEntity> producs) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.description = description;
 		this.producs = producs;
 	}
 
