@@ -1,9 +1,7 @@
 project:
   version: 0.0.1
-  
 server:
-  port: 8000
-  
+  port: 8000  
 spring:
   application:
     name: apirest

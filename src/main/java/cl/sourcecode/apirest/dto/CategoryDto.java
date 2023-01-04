@@ -1,6 +1,6 @@
 package cl.sourcecode.apirest.dto;
 
-public class CategoryResponseDto {
+public class CategoryDto {
 
 	private Long id;
 
@@ -22,13 +22,13 @@ public class CategoryResponseDto {
 		this.name = name;
 	}
 
-	public CategoryResponseDto(Long id, String name) {
+	public CategoryDto(Long id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
 	}
 
-	public CategoryResponseDto() {
+	public CategoryDto() {
 		super();
 	}
 

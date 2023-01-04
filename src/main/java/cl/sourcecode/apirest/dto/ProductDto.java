@@ -1,6 +1,8 @@
 package cl.sourcecode.apirest.dto;
 
-public class ProductRequestDto {
+public class ProductDto {
+
+	private Long id;
 
 	private String name;
 
@@ -8,7 +10,15 @@ public class ProductRequestDto {
 
 	private Long quantity;
 
-	private CategoryRequestDto category;
+	private CategoryDto category;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -34,23 +44,24 @@ public class ProductRequestDto {
 		this.quantity = quantity;
 	}
 
-	public CategoryRequestDto getCategory() {
+	public CategoryDto getCategory() {
 		return category;
 	}
 
-	public void setCategory(CategoryRequestDto category) {
+	public void setCategory(CategoryDto category) {
 		this.category = category;
 	}
 
-	public ProductRequestDto(String name, Double price, Long quantity, CategoryRequestDto category) {
+	public ProductDto(Long id, String name, Double price, Long quantity, CategoryDto category) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
 		this.category = category;
 	}
 
-	public ProductRequestDto() {
+	public ProductDto() {
 		super();
 	}
 

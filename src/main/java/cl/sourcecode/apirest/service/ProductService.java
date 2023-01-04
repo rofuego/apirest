@@ -1,15 +1,18 @@
 package cl.sourcecode.apirest.service;
 
-import cl.sourcecode.apirest.dto.ProductRequestDto;
-import cl.sourcecode.apirest.dto.ProductResponseDto;
+import java.util.List;
+
+import cl.sourcecode.apirest.dto.ProductDto;
 
 public interface ProductService {
 
-	public Iterable<ProductResponseDto> getAll();
+	public List<ProductDto> getAll();
 
-	public ProductResponseDto get(Long id);
+	public ProductDto get(Long id);
 
-	public ProductResponseDto save(ProductRequestDto product);
+	public ProductDto save(ProductDto product);
+
+	public ProductDto update(ProductDto product, Long id);
 
 	public void delete(Long id);
 }

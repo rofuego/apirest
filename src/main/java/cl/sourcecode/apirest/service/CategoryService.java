@@ -1,15 +1,18 @@
 package cl.sourcecode.apirest.service;
 
-import cl.sourcecode.apirest.dto.CategoryRequestDto;
-import cl.sourcecode.apirest.dto.CategoryResponseDto;
+import java.util.List;
+
+import cl.sourcecode.apirest.dto.CategoryDto;
 
 public interface CategoryService {
 
-	public Iterable<CategoryResponseDto> getAll();
+	public List<CategoryDto> getAll();
 
-	public CategoryResponseDto get(Long id);
+	public CategoryDto get(Long id);
 
-	public CategoryResponseDto save(CategoryRequestDto category);
+	public CategoryDto save(CategoryDto category);
+
+	public CategoryDto update(CategoryDto category, Long id);
 
 	public void delete(Long id);
 }
