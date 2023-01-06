@@ -1,8 +1,9 @@
+${AnsiColor.BLUE}
  ______     ______   __     ______     ______     ______     ______  
 /\  __ \   /\  == \ /\ \   /\  == \   /\  ___\   /\  ___\   /\__  _\ 
 \ \  __ \  \ \  _-/ \ \ \  \ \  __<   \ \  __\   \ \___  \  \/_/\ \/ 
  \ \_\ \_\  \ \_\    \ \_\  \ \_\ \_\  \ \_____\  \/\_____\    \ \_\ 
   \/_/\/_/   \/_/     \/_/   \/_/ /_/   \/_____/   \/_____/     \/_/ 
-                                                                     
-${AnsiColor.CYAN}Version ${project.version}
-${AnsiColor.GREEN}Powered by Spring Boot ${spring-boot.version}${AnsiColor.BLACK}
+
+${AnsiColor.BLACK}V-${project.version}
+${AnsiColor.GREEN}Powered by Spring Boot V-${spring-boot.version}${AnsiColor.BLACK}
