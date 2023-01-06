@@ -5,5 +5,5 @@ ${AnsiColor.BLUE}
  \ \_\ \_\  \ \_\    \ \_\  \ \_\ \_\  \ \_____\  \/\_____\    \ \_\ 
   \/_/\/_/   \/_/     \/_/   \/_/ /_/   \/_____/   \/_____/     \/_/ 
 
-${AnsiColor.BLACK}V-${project.version}
-${AnsiColor.GREEN}Powered by Spring Boot V-${spring-boot.version}${AnsiColor.BLACK}
+${AnsiColor.BLACK}v-${project.version}
+${AnsiColor.GREEN}Powered by Spring Boot v-${spring-boot.version}${AnsiColor.BLACK}
