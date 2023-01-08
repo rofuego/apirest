@@ -15,4 +15,6 @@ public interface CategoryService {
 	public CategoryDto update(CategoryDto category, Long id);
 
 	public void delete(Long id);
+
+	public CategoryDto getCategoryByProduct(Long id);
 }

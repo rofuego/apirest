@@ -2,6 +2,7 @@ package cl.sourcecode.apirest.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +26,7 @@ public class ProductEntity {
 	@Column(nullable = false)
 	private Long quantity;
 
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.EAGER)
 	private CategoryEntity category;
 
 	public Long getId() {

@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import cl.sourcecode.apirest.dto.CategoryDto;
 import cl.sourcecode.apirest.dto.ProductDto;
+import cl.sourcecode.apirest.service.CategoryService;
 import cl.sourcecode.apirest.service.ProductService;
 
 @RestController
@@ -22,8 +24,11 @@ public class ProductController {
 
 	private final ProductService service;
 
-	public ProductController(ProductService service) {
+	private final CategoryService categoryService;
+
+	public ProductController(ProductService service, CategoryService categoryService) {
 		this.service = service;
+		this.categoryService = categoryService;
 	}
 
 	@GetMapping
@@ -50,5 +55,10 @@ public class ProductController {
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+
+	@GetMapping("{id}/category")
+	public ResponseEntity<CategoryDto> getCategory(@PathVariable Long id) {
+		return new ResponseEntity<>(categoryService.getCategoryByProduct(id), HttpStatus.OK);
 	}
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import cl.sourcecode.apirest.dto.CategoryDto;
 import cl.sourcecode.apirest.entity.CategoryEntity;
 import cl.sourcecode.apirest.repository.CategoryRepository;
+import cl.sourcecode.apirest.repository.ProductRepository;
 import cl.sourcecode.apirest.service.CategoryService;
 
 @Service
@@ -16,10 +17,13 @@ public class CategoryServiceImpl implements CategoryService {
 
 	private final CategoryRepository repository;
 
+	private final ProductRepository productRepository;
+
 	private final ModelMapper mapper;
 
-	public CategoryServiceImpl(CategoryRepository repository, ModelMapper mapper) {
+	public CategoryServiceImpl(CategoryRepository repository, ProductRepository productRepository, ModelMapper mapper) {
 		this.repository = repository;
+		this.productRepository = productRepository;
 		this.mapper = mapper;
 	}
 
@@ -55,6 +59,11 @@ public class CategoryServiceImpl implements CategoryService {
 	public void delete(Long id) {
 		repository.deleteById(id);
 
+	}
+
+	@Override
+	public CategoryDto getCategoryByProduct(Long id) {
+		return mapper.map(productRepository.findById(id).get().getCategory(), CategoryDto.class);
 	}
 
 }
