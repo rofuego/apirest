@@ -1,6 +1,9 @@
 project:
-  version: ^project.version^
   name: ^project.artifactId^
+  version: ^project.version^
+server:
+  servlet:
+    context-path: /api
 spring:
   profiles:
     active: dev

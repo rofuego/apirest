@@ -17,7 +17,7 @@ import cl.sourcecode.apirest.dto.CategoryDto;
 import cl.sourcecode.apirest.service.CategoryService;
 
 @RestController
-@RequestMapping("/api/categories")
+@RequestMapping("/categories")
 public class CategoryController {
 
 	private final CategoryService service;

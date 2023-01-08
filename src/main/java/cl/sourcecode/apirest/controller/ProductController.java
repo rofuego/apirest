@@ -19,7 +19,7 @@ import cl.sourcecode.apirest.service.CategoryService;
 import cl.sourcecode.apirest.service.ProductService;
 
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/products")
 public class ProductController {
 
 	private final ProductService service;
