@@ -7,3 +7,6 @@ server:
 spring:
   profiles:
     active: dev
+logging:
+  level:
+    web: DEBUG
