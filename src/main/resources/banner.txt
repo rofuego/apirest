@@ -6,3 +6,4 @@
        |_|
 Version ${project.version}
 Powered by Spring Boot ${spring-boot.version}
+Java ${java.version}
