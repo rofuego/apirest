@@ -60,10 +60,4 @@ public class CategoryServiceImpl implements CategoryService {
 		repository.deleteById(id);
 
 	}
-
-	@Override
-	public CategoryDto getCategoryByProduct(Long id) {
-		return mapper.map(productRepository.findById(id).get().getCategory(), CategoryDto.class);
-	}
-
 }

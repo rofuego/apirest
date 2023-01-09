@@ -2,6 +2,7 @@ package cl.sourcecode.apirest.service;
 
 import java.util.List;
 
+import cl.sourcecode.apirest.dto.CategoryDto;
 import cl.sourcecode.apirest.dto.ProductDto;
 
 public interface ProductService {
@@ -15,4 +16,6 @@ public interface ProductService {
 	public ProductDto update(ProductDto product, Long id);
 
 	public void delete(Long id);
+
+	public CategoryDto getCategoryByProductId(Long id);
 }

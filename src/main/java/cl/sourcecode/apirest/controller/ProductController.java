@@ -22,43 +22,40 @@ import cl.sourcecode.apirest.service.ProductService;
 @RequestMapping("/products")
 public class ProductController {
 
-	private final ProductService service;
+	private final ProductService productService;
 
-	private final CategoryService categoryService;
-
-	public ProductController(ProductService service, CategoryService categoryService) {
-		this.service = service;
-		this.categoryService = categoryService;
+	public ProductController(ProductService productService) {
+		this.productService = productService;
 	}
 
 	@GetMapping
 	public ResponseEntity<List<ProductDto>> getAll() {
-		return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
+		return new ResponseEntity<>(productService.getAll(), HttpStatus.OK);
 	}
 
 	@PostMapping
 	public ResponseEntity<ProductDto> save(@RequestBody ProductDto product) {
-		return new ResponseEntity<>(service.save(product), HttpStatus.CREATED);
+		return new ResponseEntity<>(productService.save(product), HttpStatus.CREATED);
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<ProductDto> get(@PathVariable Long id) {
-		return new ResponseEntity<>(service.get(id), HttpStatus.OK);
+		return new ResponseEntity<>(productService.get(id), HttpStatus.OK);
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<ProductDto> update(@RequestBody ProductDto product, @PathVariable Long id) {
-		return new ResponseEntity<>(service.update(product, id), HttpStatus.OK);
+		return new ResponseEntity<>(productService.update(product, id), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
-		service.delete(id);
+		productService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 	@GetMapping("{id}/category")
 	public ResponseEntity<CategoryDto> getCategory(@PathVariable Long id) {
-		return new ResponseEntity<>(categoryService.getCategoryByProduct(id), HttpStatus.OK);
+		return new ResponseEntity<>(productService.getCategoryByProductId(id), HttpStatus.OK);
 	}
 }
