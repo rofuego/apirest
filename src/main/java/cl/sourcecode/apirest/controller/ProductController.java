@@ -57,4 +57,5 @@ public class ProductController {
 	public ResponseEntity<CategoryDto> getCategory(@PathVariable Long id) {
 		return new ResponseEntity<>(productService.getCategoryByProductId(id), HttpStatus.OK);
 	}
+
 }

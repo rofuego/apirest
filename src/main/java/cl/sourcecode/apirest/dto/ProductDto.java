@@ -1,5 +1,7 @@
 package cl.sourcecode.apirest.dto;
 
+import java.util.List;
+
 public class ProductDto {
 
 	private Long id;
@@ -11,6 +13,8 @@ public class ProductDto {
 	private Long quantity;
 
 	private CategoryDto category;
+
+	private List<TagDto> tags;
 
 	public Long getId() {
 		return id;
@@ -52,13 +56,22 @@ public class ProductDto {
 		this.category = category;
 	}
 
-	public ProductDto(Long id, String name, Double price, Long quantity, CategoryDto category) {
+	public List<TagDto> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<TagDto> tags) {
+		this.tags = tags;
+	}
+
+	public ProductDto(Long id, String name, Double price, Long quantity, CategoryDto category, List<TagDto> tags) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
 		this.category = category;
+		this.tags = tags;
 	}
 
 	public ProductDto() {

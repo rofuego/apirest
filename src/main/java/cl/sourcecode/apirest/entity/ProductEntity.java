@@ -1,11 +1,16 @@
 package cl.sourcecode.apirest.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -26,8 +31,13 @@ public class ProductEntity {
 	@Column(nullable = false)
 	private Long quantity;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne()
+	@JoinColumn(name = "categories_id")
 	private CategoryEntity category;
+
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "products_tags", joinColumns = @JoinColumn(name = "products_id"), inverseJoinColumns = @JoinColumn(name = "tags_id"))
+	private List<TagEntity> tags;
 
 	public Long getId() {
 		return id;
@@ -69,16 +79,27 @@ public class ProductEntity {
 		this.category = category;
 	}
 
-	public ProductEntity(Long id, String name, Double price, Long quantity, CategoryEntity category) {
+	public List<TagEntity> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<TagEntity> tags) {
+		this.tags = tags;
+	}
+
+	public ProductEntity(Long id, String name, Double price, Long quantity, CategoryEntity category,
+			List<TagEntity> tags) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
 		this.category = category;
+		this.tags = tags;
 	}
 
 	public ProductEntity() {
 		super();
 	}
+
 }

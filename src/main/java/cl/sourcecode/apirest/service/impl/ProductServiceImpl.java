@@ -3,13 +3,18 @@ package cl.sourcecode.apirest.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import cl.sourcecode.apirest.dto.CategoryDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import cl.sourcecode.apirest.dto.CategoryDto;
 import cl.sourcecode.apirest.dto.ProductDto;
+import cl.sourcecode.apirest.dto.TagDto;
+import cl.sourcecode.apirest.entity.CategoryEntity;
 import cl.sourcecode.apirest.entity.ProductEntity;
+import cl.sourcecode.apirest.entity.TagEntity;
+import cl.sourcecode.apirest.repository.CategoryRepository;
 import cl.sourcecode.apirest.repository.ProductRepository;
+import cl.sourcecode.apirest.repository.TagRepository;
 import cl.sourcecode.apirest.service.ProductService;
 
 @Service
@@ -17,10 +22,17 @@ public class ProductServiceImpl implements ProductService {
 
 	private final ProductRepository productRepository;
 
+	private final CategoryRepository categoryRepository;
+
+	private final TagRepository tagRepository;
+
 	private final ModelMapper mapper;
 
-	public ProductServiceImpl(ProductRepository productRepository, ModelMapper mapper) {
+	public ProductServiceImpl(ProductRepository productRepository, CategoryRepository categoryRepository,
+			TagRepository tagRepository, ModelMapper mapper) {
 		this.productRepository = productRepository;
+		this.categoryRepository = categoryRepository;
+		this.tagRepository = tagRepository;
 		this.mapper = mapper;
 	}
 
@@ -41,7 +53,18 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public ProductDto save(ProductDto product) {
-		ProductEntity saved = productRepository.save(mapper.map(product, ProductEntity.class));
+		ProductEntity entity = new ProductEntity();
+		entity.setName(product.getName());
+		entity.setPrice(product.getPrice());
+		entity.setQuantity(product.getQuantity());
+		CategoryEntity category = categoryRepository.findById(product.getCategory().getId()).get();
+		entity.setCategory(category);
+		List<TagEntity> tags = new ArrayList<>();
+		for (TagDto tag : product.getTags()) {
+			tags.add(tagRepository.findById(tag.getId()).get());
+		}
+		entity.setTags(tags);
+		ProductEntity saved = productRepository.save(entity);
 		return mapper.map(productRepository.findById(saved.getId()).get(), ProductDto.class);
 	}
 

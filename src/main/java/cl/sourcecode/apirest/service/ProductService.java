@@ -18,4 +18,5 @@ public interface ProductService {
 	public void delete(Long id);
 
 	public CategoryDto getCategoryByProductId(Long id);
+
 }
