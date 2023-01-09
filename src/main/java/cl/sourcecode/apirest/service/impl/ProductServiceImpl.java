@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import cl.sourcecode.apirest.dto.CategoryDto;
 import cl.sourcecode.apirest.dto.ProductDto;
 import cl.sourcecode.apirest.dto.TagDto;
-import cl.sourcecode.apirest.entity.CategoryEntity;
 import cl.sourcecode.apirest.entity.ProductEntity;
 import cl.sourcecode.apirest.entity.TagEntity;
 import cl.sourcecode.apirest.repository.CategoryRepository;
@@ -53,19 +52,14 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public ProductDto save(ProductDto product) {
-		ProductEntity entity = new ProductEntity();
-		entity.setName(product.getName());
-		entity.setPrice(product.getPrice());
-		entity.setQuantity(product.getQuantity());
-		CategoryEntity category = categoryRepository.findById(product.getCategory().getId()).get();
-		entity.setCategory(category);
+		ProductEntity entity = mapper.map(product, ProductEntity.class);
+		entity.setCategory(categoryRepository.findById(product.getCategory().getId()).get());
 		List<TagEntity> tags = new ArrayList<>();
 		for (TagDto tag : product.getTags()) {
 			tags.add(tagRepository.findById(tag.getId()).get());
 		}
 		entity.setTags(tags);
-		ProductEntity saved = productRepository.save(entity);
-		return mapper.map(productRepository.findById(saved.getId()).get(), ProductDto.class);
+		return mapper.map(productRepository.save(entity), ProductDto.class);
 	}
 
 	@Override
