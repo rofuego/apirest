@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cl.sourcecode.apirest.dto.CategoryDto;
-import cl.sourcecode.apirest.repository.CategoryRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 

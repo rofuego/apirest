@@ -9,27 +9,23 @@ import org.springframework.stereotype.Service;
 import cl.sourcecode.apirest.dto.CategoryDto;
 import cl.sourcecode.apirest.entity.CategoryEntity;
 import cl.sourcecode.apirest.repository.CategoryRepository;
-import cl.sourcecode.apirest.repository.ProductRepository;
 import cl.sourcecode.apirest.service.CategoryService;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-	private final CategoryRepository repository;
-
-	private final ProductRepository productRepository;
+	private final CategoryRepository categoryRepository;
 
 	private final ModelMapper mapper;
 
-	public CategoryServiceImpl(CategoryRepository repository, ProductRepository productRepository, ModelMapper mapper) {
-		this.repository = repository;
-		this.productRepository = productRepository;
+	public CategoryServiceImpl(CategoryRepository repository, ModelMapper mapper) {
+		this.categoryRepository = repository;
 		this.mapper = mapper;
 	}
 
 	@Override
 	public List<CategoryDto> getAll() {
-		Iterable<CategoryEntity> iterable = repository.findAll();
+		Iterable<CategoryEntity> iterable = categoryRepository.findAll();
 		List<CategoryDto> list = new ArrayList<>();
 		for (CategoryEntity entity : iterable) {
 			list.add(mapper.map(entity, CategoryDto.class));
@@ -39,25 +35,25 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public CategoryDto get(Long id) {
-		return mapper.map(repository.findById(id).get(), CategoryDto.class);
+		return mapper.map(categoryRepository.findById(id).get(), CategoryDto.class);
 	}
 
 	@Override
 	public CategoryDto save(CategoryDto category) {
-		CategoryEntity entity = repository.save(mapper.map(category, CategoryEntity.class));
-		return mapper.map(repository.findById(entity.getId()).get(), CategoryDto.class);
+		CategoryEntity entity = categoryRepository.save(mapper.map(category, CategoryEntity.class));
+		return mapper.map(categoryRepository.findById(entity.getId()).get(), CategoryDto.class);
 	}
 
 	@Override
 	public CategoryDto update(CategoryDto category, Long id) {
 		CategoryEntity entity = mapper.map(category, CategoryEntity.class);
 		entity.setId(id);
-		return mapper.map(repository.findById(entity.getId()).get(), CategoryDto.class);
+		return mapper.map(categoryRepository.findById(entity.getId()).get(), CategoryDto.class);
 	}
 
 	@Override
 	public void delete(Long id) {
-		repository.deleteById(id);
+		categoryRepository.deleteById(id);
 
 	}
 }

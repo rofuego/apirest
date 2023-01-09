@@ -5,5 +5,6 @@
  \__,_|| .__/ |_||_|    \___||___/ \__|
        |_|
 Version ${project.version}
-Powered by Spring Boot ${spring-boot.version}
-Java ${java.version}
+${AnsiColor.GREEN}Powered by Spring Boot ${spring-boot.version}
+${AnsiColor.CYAN}Java ${java.version}
+${AnsiColor.BLACK}

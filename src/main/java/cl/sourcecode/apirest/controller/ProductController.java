@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cl.sourcecode.apirest.dto.CategoryDto;
 import cl.sourcecode.apirest.dto.ProductDto;
-import cl.sourcecode.apirest.service.CategoryService;
 import cl.sourcecode.apirest.service.ProductService;
 
 @RestController
