@@ -4,6 +4,7 @@ import java.util.List;
 
 import cl.sourcecode.apirest.dto.CategoryDto;
 import cl.sourcecode.apirest.dto.ProductDto;
+import cl.sourcecode.apirest.dto.TagDto;
 
 public interface ProductService {
 
@@ -18,5 +19,7 @@ public interface ProductService {
 	public void delete(Long id);
 
 	public CategoryDto getCategoryByProductId(Long id);
+
+	public List<TagDto> getTagsByProductId(Long id);
 
 }

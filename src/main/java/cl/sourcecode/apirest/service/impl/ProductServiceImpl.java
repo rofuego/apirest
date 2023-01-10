@@ -1,6 +1,7 @@
 package cl.sourcecode.apirest.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -77,5 +78,10 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public CategoryDto getCategoryByProductId(Long id) {
 		return mapper.map(productRepository.findById(id).get().getCategory(), CategoryDto.class);
+	}
+
+	@Override
+	public List<TagDto> getTagsByProductId(Long id) {
+		return Arrays.asList(mapper.map(productRepository.findById(id).get().getTags(), TagDto[].class));
 	}
 }

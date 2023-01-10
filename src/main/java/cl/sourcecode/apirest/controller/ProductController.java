@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cl.sourcecode.apirest.dto.CategoryDto;
 import cl.sourcecode.apirest.dto.ProductDto;
+import cl.sourcecode.apirest.dto.TagDto;
 import cl.sourcecode.apirest.service.ProductService;
 
 @RestController
@@ -56,6 +57,11 @@ public class ProductController {
 	@GetMapping("{id}/category")
 	public ResponseEntity<CategoryDto> getCategory(@PathVariable Long id) {
 		return new ResponseEntity<>(productService.getCategoryByProductId(id), HttpStatus.OK);
+	}
+
+	@GetMapping("{id}/tags")
+	public ResponseEntity<List<TagDto>> getTagsByProduct(@PathVariable Long id) {
+		return new ResponseEntity<>(productService.getTagsByProductId(id), HttpStatus.OK);
 	}
 
 }
