@@ -67,7 +67,13 @@ public class ProductServiceImpl implements ProductService {
 	public ProductDto update(ProductDto product, Long id) {
 		ProductEntity entity = mapper.map(product, ProductEntity.class);
 		entity.setId(id);
-		return mapper.map(productRepository.findById(entity.getId()).get(), ProductDto.class);
+		entity.setCategory(categoryRepository.findById(product.getCategory().getId()).get());
+		List<TagEntity> tags = new ArrayList<>();
+		for (TagDto tag : product.getTags()) {
+			tags.add(tagRepository.findById(tag.getId()).get());
+		}
+		entity.setTags(tags);
+		return mapper.map(productRepository.save(entity), ProductDto.class);
 	}
 
 	@Override

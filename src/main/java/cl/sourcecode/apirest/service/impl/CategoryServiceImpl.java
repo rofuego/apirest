@@ -40,20 +40,17 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public CategoryDto save(CategoryDto category) {
-		CategoryEntity entity = categoryRepository.save(mapper.map(category, CategoryEntity.class));
-		return mapper.map(categoryRepository.findById(entity.getId()).get(), CategoryDto.class);
+		return mapper.map(categoryRepository.save(mapper.map(category, CategoryEntity.class)), CategoryDto.class);
 	}
 
 	@Override
 	public CategoryDto update(CategoryDto category, Long id) {
-		CategoryEntity entity = mapper.map(category, CategoryEntity.class);
-		entity.setId(id);
-		return mapper.map(categoryRepository.findById(entity.getId()).get(), CategoryDto.class);
+		category.setId(id);
+		return mapper.map(categoryRepository.save(mapper.map(category, CategoryEntity.class)), CategoryDto.class);
 	}
 
 	@Override
 	public void delete(Long id) {
 		categoryRepository.deleteById(id);
-
 	}
 }

@@ -35,26 +35,22 @@ public class TagServiceImpl implements TagService {
 
 	@Override
 	public TagDto get(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.map(tagRepository.findById(id).get(), TagDto.class);
 	}
 
 	@Override
 	public TagDto save(TagDto tag) {
-		TagEntity entity = tagRepository.save(mapper.map(tag, TagEntity.class));
-		return mapper.map(entity, TagDto.class);
+		return mapper.map(tagRepository.save(mapper.map(tag, TagEntity.class)), TagDto.class);
 	}
 
 	@Override
 	public TagDto update(TagDto tag, Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		tag.setId(id);
+		return mapper.map(tagRepository.save(mapper.map(tag, TagEntity.class)), TagDto.class);
 	}
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
-
+		tagRepository.deleteById(id);
 	}
-
 }
