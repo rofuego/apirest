@@ -1,5 +1,6 @@
 package cl.sourcecode.apirest.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,8 +16,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "products")
-public class ProductEntity {
+@Table(name = "product")
+public class ProductEntity implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,11 +38,11 @@ public class ProductEntity {
 	private Long quantity;
 
 	@ManyToOne()
-	@JoinColumn(name = "categories_id")
+	@JoinColumn(name = "category_id")
 	private CategoryEntity category;
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "products_tags", joinColumns = @JoinColumn(name = "products_id"), inverseJoinColumns = @JoinColumn(name = "tags_id"))
+	@JoinTable(name = "product_tag", joinColumns = @JoinColumn(name = "product_id"))
 	private List<TagEntity> tags;
 
 	public Long getId() {
