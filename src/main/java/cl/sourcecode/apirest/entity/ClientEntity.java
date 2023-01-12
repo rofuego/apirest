@@ -10,9 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -26,8 +24,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "product")
-public class ProductEntity implements Serializable {
+@Table(name = "client")
+public class ClientEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -39,20 +37,13 @@ public class ProductEntity implements Serializable {
 	private String name;
 
 	@Column(nullable = false)
-	private Double price;
+	private String dni;
 
-	@Column(nullable = false)
-	private Long quantity;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "contact_id")
+	private ContactEntity contact;
 
-	@ManyToOne()
-	@JoinColumn(name = "category_id")
-	private CategoryEntity category;
-
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "product_tag", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
-	private List<TagEntity> tags;
-
-	@OneToOne(mappedBy = "product")
-	private ItemEntity item;
+	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+	private List<InvoiceEntity> invoices;
 
 }

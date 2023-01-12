@@ -1,17 +1,13 @@
 package cl.sourcecode.apirest.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -26,8 +22,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "product")
-public class ProductEntity implements Serializable {
+@Table(name = "item")
+public class ItemEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -36,23 +32,19 @@ public class ProductEntity implements Serializable {
 	private Long id;
 
 	@Column(nullable = false)
-	private String name;
+	private Long quantity;
 
 	@Column(nullable = false)
 	private Double price;
 
 	@Column(nullable = false)
-	private Long quantity;
+	private Double subtotal;
+
+	@OneToOne
+	@JoinColumn(name = "product_id")
+	private ProductEntity product;
 
 	@ManyToOne()
-	@JoinColumn(name = "category_id")
-	private CategoryEntity category;
-
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "product_tag", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
-	private List<TagEntity> tags;
-
-	@OneToOne(mappedBy = "product")
-	private ItemEntity item;
-
+	@JoinColumn(name = "invoice_id")
+	private InvoiceEntity invoice;
 }
