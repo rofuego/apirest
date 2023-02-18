@@ -1,56 +1,53 @@
 package cl.sourcecode.apirest.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Service;
-
 import cl.sourcecode.apirest.dto.CategoryDto;
 import cl.sourcecode.apirest.entity.CategoryEntity;
 import cl.sourcecode.apirest.repository.CategoryRepository;
 import cl.sourcecode.apirest.service.CategoryService;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-	private final CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
-	private final ModelMapper mapper;
+    public CategoryServiceImpl(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
 
-	public CategoryServiceImpl(CategoryRepository repository, ModelMapper mapper) {
-		this.categoryRepository = repository;
-		this.mapper = mapper;
-	}
+    @Override
+    public List<CategoryDto> getAllCategories() {
+        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        return categoryEntityList.stream().map(categoryEntity ->
+                new CategoryDto(categoryEntity.getId(), categoryEntity.getName())).collect(Collectors.toList());
+    }
 
-	@Override
-	public List<CategoryDto> getAll() {
-		Iterable<CategoryEntity> iterable = categoryRepository.findAll();
-		List<CategoryDto> list = new ArrayList<>();
-		for (CategoryEntity entity : iterable) {
-			list.add(mapper.map(entity, CategoryDto.class));
-		}
-		return list;
-	}
+    @Override
+    public CategoryDto getCategory(Long id) {
+        CategoryEntity categoryEntity = categoryRepository.findById(id).get();
+        return new CategoryDto(categoryEntity.getId(), categoryEntity.getName());
+    }
 
-	@Override
-	public CategoryDto get(Long id) {
-		return mapper.map(categoryRepository.findById(id).get(), CategoryDto.class);
-	}
+    @Override
+    public CategoryDto saveCategory(CategoryDto category) {
+        CategoryEntity categoryEntity = categoryRepository.save(new CategoryEntity(null, category.getName(), new ArrayList<>()));
+        return new CategoryDto(categoryEntity.getId(), categoryEntity.getName());
+    }
 
-	@Override
-	public CategoryDto save(CategoryDto category) {
-		return mapper.map(categoryRepository.save(mapper.map(category, CategoryEntity.class)), CategoryDto.class);
-	}
+    @Override
+    public CategoryDto updateCategory(CategoryDto category, Long id) {
+        CategoryEntity categoryEntity = categoryRepository.findById(id).get();
+        categoryEntity.setName(category.getName());
+        CategoryEntity updatedCategoryEntity = categoryRepository.save(categoryEntity);
+        return new CategoryDto(updatedCategoryEntity.getId(), updatedCategoryEntity.getName());
+    }
 
-	@Override
-	public CategoryDto update(CategoryDto category, Long id) {
-		category.setId(id);
-		return mapper.map(categoryRepository.save(mapper.map(category, CategoryEntity.class)), CategoryDto.class);
-	}
-
-	@Override
-	public void delete(Long id) {
-		categoryRepository.deleteById(id);
-	}
+    @Override
+    public void deleteCategory(Long id) {
+        categoryRepository.deleteById(id);
+    }
 }

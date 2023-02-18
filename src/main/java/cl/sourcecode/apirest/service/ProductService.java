@@ -1,25 +1,25 @@
 package cl.sourcecode.apirest.service;
 
-import java.util.List;
-
 import cl.sourcecode.apirest.dto.CategoryDto;
 import cl.sourcecode.apirest.dto.ProductDto;
 import cl.sourcecode.apirest.dto.TagDto;
 
+import java.util.List;
+
 public interface ProductService {
 
-	public List<ProductDto> getAll();
+    public List<ProductDto> getAllProducts();
 
-	public ProductDto get(Long id);
+    public ProductDto getProduct(Long id);
 
-	public ProductDto save(ProductDto product);
+    public ProductDto saveProduct(ProductDto product);
 
-	public ProductDto update(ProductDto product, Long id);
+    public ProductDto updateProduct(ProductDto product, Long id);
 
-	public void delete(Long id);
+    public void deleteProduct(Long id);
 
-	public CategoryDto getCategoryByProductId(Long id);
+    public CategoryDto getCategoryByProductId(Long id);
 
-	public List<TagDto> getTagsByProductId(Long id);
+    public List<TagDto> getAllTagsByProductId(Long id);
 
 }

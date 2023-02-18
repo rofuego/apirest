@@ -27,28 +27,28 @@ public class CategoryController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<CategoryDto>> getAll() {
-		return new ResponseEntity<>(categoryService.getAll(), HttpStatus.OK);
+	public ResponseEntity<List<CategoryDto>> getAllCategories() {
+		return new ResponseEntity<>(categoryService.getAllCategories(), HttpStatus.OK);
 	}
 
 	@PostMapping
-	public ResponseEntity<CategoryDto> save(@RequestBody CategoryDto category) {
-		return new ResponseEntity<>(categoryService.save(category), HttpStatus.CREATED);
+	public ResponseEntity<CategoryDto> saveCategory(@RequestBody CategoryDto category) {
+		return new ResponseEntity<>(categoryService.saveCategory(category), HttpStatus.CREATED);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<CategoryDto> get(@PathVariable Long id) {
-		return new ResponseEntity<>(categoryService.get(id), HttpStatus.OK);
+	public ResponseEntity<CategoryDto> getCategory(@PathVariable Long id) {
+		return new ResponseEntity<>(categoryService.getCategory(id), HttpStatus.OK);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<CategoryDto> update(@RequestBody CategoryDto category, @PathVariable Long id) {
-		return new ResponseEntity<>(categoryService.update(category, id), HttpStatus.OK);
+	public ResponseEntity<CategoryDto> updateCategory(@RequestBody CategoryDto category, @PathVariable Long id) {
+		return new ResponseEntity<>(categoryService.updateCategory(category, id), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id) {
-		categoryService.delete(id);
+	public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
+		categoryService.deleteCategory(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 }

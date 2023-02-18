@@ -1,54 +1,46 @@
 package cl.sourcecode.apirest.controller;
 
-import java.util.List;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import cl.sourcecode.apirest.dto.TagDto;
 import cl.sourcecode.apirest.service.TagService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/tags")
 public class TagController {
 
-	private final TagService tagService;
+    private final TagService tagService;
 
-	public TagController(TagService tagService) {
-		this.tagService = tagService;
-	}
+    public TagController(TagService tagService) {
+        this.tagService = tagService;
+    }
 
-	@GetMapping
-	public ResponseEntity<List<TagDto>> getAll() {
-		return new ResponseEntity<>(tagService.getAll(), HttpStatus.OK);
-	}
+    @GetMapping
+    public ResponseEntity<List<TagDto>> getAllTags() {
+        return new ResponseEntity<>(tagService.getAllTags(), HttpStatus.OK);
+    }
 
-	@GetMapping("{id}")
-	public ResponseEntity<TagDto> get(@PathVariable Long id) {
-		return new ResponseEntity<>(tagService.get(id), HttpStatus.OK);
-	}
+    @GetMapping("{id}")
+    public ResponseEntity<TagDto> getTag(@PathVariable Long id) {
+        return new ResponseEntity<>(tagService.getTag(id), HttpStatus.OK);
+    }
 
-	@PostMapping
-	public ResponseEntity<TagDto> save(@RequestBody TagDto tag) {
-		return new ResponseEntity<>(tagService.save(tag), HttpStatus.CREATED);
-	}
+    @PostMapping
+    public ResponseEntity<TagDto> saveTag(@RequestBody TagDto tag) {
+        return new ResponseEntity<>(tagService.saveTag(tag), HttpStatus.CREATED);
+    }
 
-	@PutMapping("/{id}")
-	public ResponseEntity<TagDto> update(@PathVariable Long id, @RequestBody TagDto tag) {
-		return new ResponseEntity<>(tagService.update(tag, id), HttpStatus.OK);
-	}
+    @PutMapping("/{id}")
+    public ResponseEntity<TagDto> updateTag(@PathVariable Long id, @RequestBody TagDto tag) {
+        return new ResponseEntity<>(tagService.updateTag(tag, id), HttpStatus.OK);
+    }
 
-	@DeleteMapping("{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id) {
-		tagService.delete(id);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	}
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteTag(@PathVariable Long id) {
+        tagService.deleteTag(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
